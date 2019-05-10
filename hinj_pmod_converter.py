@@ -20,7 +20,7 @@
 Utility for converting libraries that use standard SPI interface to one of the 
 PMOD SPI interfaces on Alorium's Hinj board.
 
-* Author(s): Bryan Craker, Jason Pecor
+* Author(s): Bryan Craker
 
 """
 
