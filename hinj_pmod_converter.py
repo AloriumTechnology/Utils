@@ -1,5 +1,3 @@
-#!/usr/bin/python3
-
 #  Copyright 2019 Alorium Technology, LLC.
 #
 #  This utility is free software: you can redistribute it and/or modify
@@ -22,20 +20,21 @@
 Utility for converting libraries that use standard SPI interface to one of the 
 PMOD SPI interfaces on Alorium's Hinj board.
 
-* Author(s): Bryan Craker
+* Author(s): Bryan Craker, Jason Pecor
 
 """
 
+# This script requires Python 3, so check for it and error out if not
+import sys
+if sys.version_info[0] < 3:
+    raise Exception("\n\nMust be using Python 3\n\n")
+
+# Other imports - only do after Python 3 check to avoid errors
 import tkinter
-#from tkinter import Tk
-#from tkinter.filedialog import askopenfilename
 from tkinter.filedialog import askdirectory
-
 import os
-#from os import listdir
-#from os.path import isfile, join
-
 from shutil import copyfile
+
 
 def replaceHeaderReferences(filename):
 
@@ -72,6 +71,7 @@ def replaceHeaderReferences(filename):
   with open(filename,'w') as f:
     for line in lines:
       f.write("%s" % line)
+
 
 def replaceSourceReferences(filename):
 
@@ -124,7 +124,7 @@ def replaceSourceReferences(filename):
 
   for idx in range(len(lines)):
     if (lines[idx].find('Serial.') != -1):
-      if (serialFound == -1) {
+      if (serialFound == -1):
         print('Serial library include found on line ' + str(idx))
         serialFound = idx
       lines[idx] = lines[idx].replace('Serial.', 'XLR8PmodSerial.', 1)
@@ -144,6 +144,7 @@ def replaceSourceReferences(filename):
   with open(filename,'w') as f:
     for line in lines:
       f.write("%s" % line)
+
 
 tkinter.Tk().withdraw()
 directory = askdirectory(initialdir=os.path.expanduser('~/Documents/Arduino/libraries/'))
